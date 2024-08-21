@@ -76,18 +76,17 @@
 
 ## 🗂️ 디렉토리 구조
 
-
-src/
-├── main/
-│ ├── java/
-│ │ └── com/example/
-│ │ ├── common/ # 가격 및 좌석 타입을 관리하는 클래스
-│ │ ├── reservation/ # 예약 관련 DAO, 모델, 서비스
-│ │ ├── seat/ # 좌석 관련 DAO, 모델, 서비스
-│ │ ├── user/ # 사용자 관련 DAO, 모델, 서비스
-│ │ └── util/ # DB 연결 유틸리티 클래스
-│ └── resources/
-│ └── jdbc.properties # MySQL 연결 설정 파일
+src/ <br>
+├── main/ <br>
+│ ├── java/ <br>
+│ │ └── com/example/ <br>
+│ │ ├── common/ # 가격 및 좌석 타입을 관리하는 클래스 <br>
+│ │ ├── reservation/ # 예약 관련 DAO, 모델, 서비스 <br>
+│ │ ├── seat/ # 좌석 관련 DAO, 모델, 서비스 <br>
+│ │ ├── user/ # 사용자 관련 DAO, 모델, 서비스 <br>
+│ │ └── util/ # DB 연결 유틸리티 클래스 <br>
+│ └── resources/ <br>
+│ └── jdbc.properties # MySQL 연결 설정 파일 <br>
 
 <br>
 
