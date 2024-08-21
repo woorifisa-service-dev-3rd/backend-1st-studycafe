@@ -17,8 +17,8 @@ import com.example.model.User;
 public class UserDAO {
 	// USER_NAME, PASSWORD, DB_URL, DATABASE
 	private static final String USER_NAME = "root";
-	private static final String PASSWORD = "1234";
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/";
+	private static final String PASSWORD = "0000";
+	private static final String DB_URL = "jdbc:mysql://localhost:3307/";
 	private static final String DATABASE = "studycafedb";
 	
 	public List<User> LoginValidation(String id, int password) throws SQLException {
@@ -50,6 +50,18 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void updateRestTime(User user, int updatedTime, int updatedPoint) throws SQLException {
+		final String chargeQuery = "UPDATE user SET resttime = ?, point = ?  WHERE userUid = ?";
+		Connection connection = DriverManager.getConnection(DB_URL + DATABASE, USER_NAME, PASSWORD);
+		PreparedStatement pstmt = connection.prepareStatement(chargeQuery);
+		pstmt.setInt(1, updatedTime);
+		pstmt.setInt(2, updatedPoint);
+		pstmt.setInt(3, user.getUserUid());
+		pstmt.executeUpdate();
+		pstmt.close();
+		connection.close();
 	}
 
 }
