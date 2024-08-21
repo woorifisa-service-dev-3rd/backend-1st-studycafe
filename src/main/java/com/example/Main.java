@@ -15,6 +15,7 @@ import com.example.util.DBUtil;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -36,6 +37,10 @@ public class Main {
         // user login
         User user;
         user = userService.login();
+
+        List<Seat> seats = seatDAO.generateSeats();
+        seatDAO.displaySeatLayout(seats, reservationDAO);
+
 
         // user
 

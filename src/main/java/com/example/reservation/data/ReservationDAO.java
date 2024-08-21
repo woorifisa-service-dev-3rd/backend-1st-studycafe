@@ -3,6 +3,8 @@ package com.example.reservation.data;
 import com.example.reservation.model.Reservation;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ReservationDAO {
 
@@ -29,4 +31,22 @@ public class ReservationDAO {
             e.printStackTrace();
         }
     }
+
+
+    public boolean isSeatAvailable(int seatId) {
+
+        String query = "SELECT COUNT(*) FROM seat WHERE seatId = ? AND seatId NOT IN (SELECT seatId FROM reservation)";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, seatId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
