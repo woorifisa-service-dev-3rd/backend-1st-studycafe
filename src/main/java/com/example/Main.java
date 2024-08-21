@@ -13,6 +13,7 @@ import com.example.user.service.UserService;
 import com.example.util.DBUtil;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -31,6 +32,11 @@ public class Main {
         SeatService seatService = new SeatService(seatDAO);
         UserService userService = new UserService(userDAO);
         ReservationService reservationService = new ReservationService(reservationDAO);
+
+
+        List<Seat> seats = seatDAO.generateSeats();
+        seatDAO.displaySeatLayout(seats, reservationDAO);
+
 
         // 사용자 UID 입력
         System.out.println("사용자 UID를 입력하세요:");
