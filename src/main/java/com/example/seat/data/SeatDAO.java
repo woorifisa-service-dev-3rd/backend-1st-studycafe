@@ -111,36 +111,85 @@ public class SeatDAO {
     }
 
     public static void displaySeatLayout(List<Seat> seats, ReservationDAO reservationDAO) {
+        // 색상 코드 정의
+        final String RED = "\u001B[31m";
+        final String DARK_GRAY = "\u001B[37;1m";
+        final String RESET = "\u001B[0m";
+
+        // 좌석 배치 배열
         String[][] layout = {
-                {"  1", "  2", "  3", "  4", "  5", "  6", "  7", "  8", "  9", " 10", " 11", " 12", " 13", " 14", " 15", " 16", " 17"},
-                {" 18", " 19", "    ", " 20", " 21", " 22", " 23", " 24", " 25", " 26", " 27", " 28", " 29", " 30", " 31", " 32", " 33"},
-                {" 34", " 35", " 36", "    ", " 37", " 38", " 39", " 40", " 41", " 42", " 43", " 44", " 45", " 46", " 47", "    ", "    "},
-                {" 48", " 49", "    ", " 50", " 51", " 52", " 53", " 54", " 55", " 56", " 57", "    ", "    ", "    ", "    ", "    ", "    "},
-                {" 58", " 59", " 60", " 61", " 62", " 63", " 64", " 65", " 66", " 67", " 68", " 69", " 70", " 71", " 72", " 73", " 74"},
-                {" 75", " 76", " 77"}
+                {"  1", "  2", "  3", "  4", "  5", "  6", "  7", "  8", "  9", " 10", " 11", " 12"},
+                {" 13", " 14", " 15", " 16", " 17", " 18", " 19", " 20", " 21", " 22", " 23", " 24"},
+                {" 25", " 26", " 27", " 28", " 29", " 30", " 31", " 32", " 33", " 34", " 35", " 36"},
+                {" 37", " 38", " 39", " 40", " 41", " 42", " 43", " 44", " 45", " 46", " 47", " 48"},
+                {" 49", " 50", " 51", " 52", " 53", " 54", " 55", " 56", " 57", " 58", " 59", " 60"},
+                {" 61", " 62", " 63", " 64", " 65", " 66", " 67", " 68", " 69", " 70", " 71", " 72"},
+                {" 73", " 74", " 75", " 76", " 77"}
         };
 
+        final int SEAT_WIDTH = 8;  // 좌석 폭을 조정 (좌석 번호와 상태에 맞게 조정)
+        final String BORDER = "+--------";  // 경계 문자열
+        final int SEATS_PER_ROW = 12;  // 한 행에 표시할 좌석 수
+
+        // 각 행에 대해 반복
         for (int row = 0; row < layout.length; row++) {
-            for (int col = 0; col < layout[row].length; col++) {
-                String cell = layout[row][col].trim();
+            String[] currentRow = layout[row];
+            int i = 0;
 
-                if (!cell.isEmpty()) {
-                    // 좌석 ID 추출
-                    int seatId = Integer.parseInt(cell.trim());
-                    Seat seat = seats.get(seatId - 1); // 좌석 ID는 1부터 시작하기 때문에 인덱스는 -1
-                    String seatType = seat.getSeatType() == SeatType.PERSON ? "P" : "G";
-                    boolean isReserved = reservationDAO.isSeatAvailable(seatId);
-                    String status = isReserved ? "[ ]" : "[X]";
-
-                    // 각 좌석을 8칸으로 맞추기 위해 출력
-                    System.out.printf("%-8s", seatType + seatId + status);
+            // 상단 경계 출력
+            while (i < currentRow.length) {
+                System.out.print(BORDER);
+                if ((i + 1) % SEATS_PER_ROW == 0) {
+                    System.out.print("+");
                 }
-                if (col < layout[row].length - 1) {
-                    System.out.print("|");  // 좌석 간 구분자
-                }
+                i++;
             }
-            System.out.println();  // 줄 바꿈
+            System.out.println();
+
+            // 좌석 번호 및 상태 출력
+            i = 0;
+            while (i < currentRow.length) {
+                String cell = currentRow[i].trim();
+                if (!cell.isEmpty()) {
+                    int seatId = Integer.parseInt(cell.trim());
+                    Seat seat = seats.get(seatId - 1);  // 좌석 ID는 1부터 시작하기 때문에 인덱스는 -1
+                    String seatType = seat.getSeatType() == SeatType.PERSON ? "P" : "G";
+                    boolean isReserved = !reservationDAO.isSeatAvailable(seatId);
+                    String status = isReserved ? "[X]" : "[ ]";
+
+                    // 좌석을 일정한 폭으로 맞추어 출력
+                    String seatDisplay = seatType + seatId + status;
+
+                    // 색상 적용
+                    if (status.equals("[X]")) {
+                        System.out.printf("| " + DARK_GRAY + "%-" + (SEAT_WIDTH - 1) + "s" + RESET, seatDisplay);
+                    }
+                    else if (seatType.equals("G")) {
+                        System.out.printf("| " + RED + "%-" + (SEAT_WIDTH - 1) + "s" + RESET, seatDisplay);
+                    } else {
+                        System.out.printf("| %-" + (SEAT_WIDTH - 1) + "s", seatDisplay);
+                    }
+                } else {
+                    // 빈 칸을 일정한 폭으로 맞추기
+                    System.out.print("|" + " ".repeat(SEAT_WIDTH - 1));
+                }
+                if ((i + 1) % SEATS_PER_ROW == 0) {
+                    System.out.print("|");
+                }
+                i++;
+            }
+            System.out.println();
+
+            // 하단 경계 출력
+            i = 0;
+            while (i < currentRow.length) {
+                System.out.print(BORDER);
+                if ((i + 1) % SEATS_PER_ROW == 0) {
+                    System.out.print("+");
+                }
+                i++;
+            }
+            System.out.println();
         }
     }
-
 }
