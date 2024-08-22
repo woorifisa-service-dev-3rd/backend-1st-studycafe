@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException {
 
         Scanner scanner = new Scanner(System.in);
-        Connection conn = DBUtil.getConnection("src/main/resources/jdbc.properties");
+        Connection conn = DBUtil.getConnection();
 
         // DAO, Service 초기화
         SeatDAO seatDAO = new SeatDAO(conn);
@@ -65,14 +65,14 @@ public class Main {
                 boolean isGroupSeatValid = true;
                 if (seat.getSeatType() == SeatType.GROUP) {
                     while (true) {
-                        System.out.println("인원 수를 입력하세요:");
+                        System.out.println("인원 수를 입력하세요(최대 6인 가능):");
                         int groupSize = scanner.nextInt();
                         isGroupSeatValid = seatService.validateGroupSeat(seat, groupSize);
                         if (isGroupSeatValid) {
                             break;
                         }else if(!isGroupSeatValid){
                             System.out.println("단체석 예약에 실패했습니다.");
-                            return;
+                            continue;
                         }
                     }
                 }

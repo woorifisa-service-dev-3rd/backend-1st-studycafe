@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/studycafe_jar</output-path>
     <root id="archive" name="studycafe.jar">
       <element id="module-output" name="studycafe" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/mysql/mysql-connector-j/8.0.32/mysql-connector-j-8.0.32.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

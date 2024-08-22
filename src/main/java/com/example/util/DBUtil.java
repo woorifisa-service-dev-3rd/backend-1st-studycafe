@@ -3,6 +3,7 @@ package com.example.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,12 +14,17 @@ public class DBUtil {
     private static Connection connection = null;
 
     // 데이터베이스 연결을 생성하는 메서드
-    public static Connection getConnection(String propertiesFilePath) {
+    public static Connection getConnection() {
         if (connection == null) {
+            Properties prop = new Properties();
+            
+            // CalssLoader를 사용해 jdbc.properties 파일 로드
             try {
-                Properties prop = new Properties();
-                FileInputStream fis = new FileInputStream(propertiesFilePath);
-                prop.load(fis);
+                InputStream inputStream = DBUtil.class.getClassLoader().getResourceAsStream("jdbc.properties");
+                if (inputStream == null) {
+                    throw new IOException("jdbc.properties 파일을 찾을 수 없습니다.");
+                }
+                prop.load(inputStream);
 
                 final String USER_NAME = prop.getProperty("USER_NAME");
                 final String PASSWORD = prop.getProperty("PASSWORD");

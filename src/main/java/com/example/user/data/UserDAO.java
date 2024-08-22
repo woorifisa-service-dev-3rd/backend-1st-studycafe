@@ -43,7 +43,7 @@ public class UserDAO {
         String query = "UPDATE user SET resttime = resttime - ? WHERE userUid = ?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, time);
+            pstmt.setInt(1, time*60);
             pstmt.setInt(2, userUid);
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -92,7 +92,6 @@ public class UserDAO {
         pstmt.setInt(3, user.getUserUid());
         pstmt.executeUpdate();
         pstmt.close();
-        connection.close();
     }
     // 복사끝2
 }
