@@ -1,7 +1,5 @@
 package util;
 
-
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -32,9 +30,18 @@ public class DBUtil {
                 final String PASSWORD = prop.getProperty("PASSWORD");
                 final String DB_URL = prop.getProperty("DB_URL");
                 final String DATABASE = prop.getProperty("DATABASE");
+                
+                // Servlet - jdbc
+                final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
+                try {
+					Class.forName(DRIVER_NAME);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
 
                 connection = DriverManager.getConnection(DB_URL + DATABASE, USER_NAME, PASSWORD);
-
+                System.out.println(connection);
+                
             } catch (SQLException | IOException e) {
                 e.printStackTrace();
             }
@@ -46,7 +53,7 @@ public class DBUtil {
     public static void closeConnection() {
         if (connection != null) {
             try {
-                connection.close();
+            	connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
