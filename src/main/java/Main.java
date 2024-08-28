@@ -22,7 +22,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Connection conn = DBUtil.getConnection();
-
+        System.out.println("conn" + conn);
         // DAO, Service 초기화
         SeatDAO seatDAO = new SeatDAO(conn);
         UserDAO userDAO = new UserDAO(conn);
@@ -35,6 +35,7 @@ public class Main {
         // user login
         User user;
         user = userService.login(scanner);
+        System.out.println("user" + user);
 
         List<Seat> seats = seatDAO.generateSeats();
         seatDAO.displaySeatLayout(seats, reservationDAO);

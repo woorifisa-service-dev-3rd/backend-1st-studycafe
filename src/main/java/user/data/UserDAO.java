@@ -13,11 +13,15 @@ public class UserDAO {
 
     private Connection connection;
 
-    public UserDAO(Connection connection) {
-        this.connection = connection;
+    public UserDAO() {
+    	
+    }
+    
+    public UserDAO(Connection conn) {
+        this.connection = conn;
     }
 
-    public User getUserByUid(int userUid) {
+	public User getUserByUid(int userUid) {
         String query = "SELECT * FROM user WHERE userUid = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setInt(1, userUid);
@@ -54,13 +58,17 @@ public class UserDAO {
     // 복사1
     public List<User> LoginValidation(String id, int password) throws SQLException {
         List<User> user = new ArrayList<User>();
-
         // connection, pstmt, resultset
-        final String selectQuery = "SELECT userUid, name, phone, resttime, point, id, password FROM user where id=? and password=?";
+        String selectQuery = "SELECT userUid, name, phone, resttime, point, id, password FROM user where id=? and password=?";
+        System.out.println(selectQuery);
         PreparedStatement pstmt = connection.prepareStatement(selectQuery);
+        System.out.println(pstmt);
         pstmt.setString(1, id);
         pstmt.setInt(2, password);
         ResultSet resultSet = pstmt.executeQuery();
+        
+        
+        System.out.println(resultSet);
 
         try(pstmt; resultSet;){
             if(resultSet.next()) {
@@ -73,13 +81,15 @@ public class UserDAO {
                 int getPassword = resultSet.getInt("password");
 
                 user.add(new User(getUserUid, getPassword, getName, getId, getPhone, getResttime, getPoint));
+                System.out.println(user);
             }
 
             return user;
         } catch(SQLException e) {
+        	System.out.println("여기서 에러~");
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
     // 복사끝1
 

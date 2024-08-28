@@ -70,7 +70,11 @@ public class UserService {
                 break;
             }
 
-            loginResult = (List<User>) userDAO.LoginValidation(inputId, inputPassword);
+            System.out.println(inputId);
+            System.out.println(inputPassword);
+            
+            loginResult = userDAO.LoginValidation(inputId, inputPassword);
+            
             if (loginResult.size() == 0) {
                 System.out.println("아이디 혹은 비밀번호가 잘못되었습니다.");
                 System.out.println("다시 입력하시겠습니까? (y/n)");
