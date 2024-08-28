@@ -3,6 +3,7 @@ package reservation.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,10 @@ public class ReservationController implements Controller {
 
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    	
+    	String selectionUrl = "/WEB-INF/seatSelection.jsp";
+
+    	
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -50,7 +55,7 @@ public class ReservationController implements Controller {
 
         if (seat == null) {
             request.setAttribute("message", "해당 좌석은 이용할 수 없습니다.");
-            request.getRequestDispatcher("/seatSelection.jsp").forward(request, response);
+            request.getRequestDispatcher(selectionUrl).forward(request, response);
             return;
         }
 
@@ -61,7 +66,7 @@ public class ReservationController implements Controller {
 
             if (!isGroupSeatValid) {
                 request.setAttribute("message", "단체석 예약에 실패했습니다.");
-                request.getRequestDispatcher("/seatSelection.jsp").forward(request, response);
+                request.getRequestDispatcher(selectionUrl).forward(request, response);
                 return;
             }
         }
@@ -72,7 +77,7 @@ public class ReservationController implements Controller {
 
         if (!userService.hasEnoughTime(userUid, selectedPriceType)) {
             request.setAttribute("message", "보유 시간이 부족합니다. 다시 선택해 주세요.");
-            request.getRequestDispatcher("/seatSelection.jsp").forward(request, response);
+            request.getRequestDispatcher(selectionUrl).forward(request, response);
             return;
         }
 
@@ -83,6 +88,6 @@ public class ReservationController implements Controller {
 
         // 성공 메시지와 함께 페이지로 리다이렉트
         request.setAttribute("message", "예약이 완료되었습니다.");
-        request.getRequestDispatcher("/success.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/success.jsp").forward(request, response);
     }
 }

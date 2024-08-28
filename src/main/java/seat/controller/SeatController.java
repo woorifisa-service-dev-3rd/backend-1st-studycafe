@@ -3,6 +3,7 @@ package seat.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,9 @@ public class SeatController implements Controller {
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        // 좌석 선택 처리 로직 추가 가능
-        request.getRequestDispatcher("/seatSelection.jsp").forward(request, response);
+
+        String url = "/WEB-INF/seatSelection.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		dispatcher.forward(request, response);
     }
 }
