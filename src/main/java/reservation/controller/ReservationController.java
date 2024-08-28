@@ -42,8 +42,10 @@ public class ReservationController implements Controller {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
+        System.out.println("good");
+        
         if (user == null) {
-            response.sendRedirect("loginForm.html"); // 로그인 페이지로 리다이렉트
+            response.sendRedirect("/studycafe/loginForm.html"); // 로그인 페이지로 리다이렉트
             return;
         }
 

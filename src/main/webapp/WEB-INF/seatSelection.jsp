@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>좌석 선택</h1>
-    <form action="seatSelection" method="post">
+    <form action="/studycafe/front-controller/reservation" method="post">
         <label for="seatId">이용할 좌석 번호를 입력하세요:</label>
         <input type="text" id="seatId" name="seatId"><br><br>
         
