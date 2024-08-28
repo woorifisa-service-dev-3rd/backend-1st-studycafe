@@ -34,11 +34,14 @@ public class FrontController extends HttpServlet{
 		
 		// uri별 개별 컨트롤러 불러오기
 		Controller controller = controllerMap.get(path);
+		System.out.println("Controller: " + controller);
 		
 		// 가져온 컨트롤러에 요청 처리 호출
 		if (controller != null) {
 			try {
 				controller.process(req, resp);
+				System.out.println("controller process req: " + req);
+				System.out.println("controller process resp: " + resp);
 			} catch (ServletException | IOException | SQLException e) {
 				e.printStackTrace();
 				System.out.println("controller: error");

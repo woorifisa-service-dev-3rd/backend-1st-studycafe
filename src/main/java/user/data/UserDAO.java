@@ -1,6 +1,7 @@
 package user.data;
 
 import user.model.User;
+import util.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +18,9 @@ public class UserDAO {
     	
     }
     
-    public UserDAO(Connection conn) {
-        this.connection = conn;
+    public UserDAO(Connection connection) {
+        this.connection = connection;
+        System.out.println(connection+"dddd");
     }
 
 	public User getUserByUid(int userUid) {
@@ -58,17 +60,13 @@ public class UserDAO {
     // 복사1
     public List<User> LoginValidation(String id, int password) throws SQLException {
         List<User> user = new ArrayList<User>();
+        
         // connection, pstmt, resultset
         String selectQuery = "SELECT userUid, name, phone, resttime, point, id, password FROM user where id=? and password=?";
-        System.out.println(selectQuery);
         PreparedStatement pstmt = connection.prepareStatement(selectQuery);
-        System.out.println(pstmt);
         pstmt.setString(1, id);
         pstmt.setInt(2, password);
         ResultSet resultSet = pstmt.executeQuery();
-        
-        
-        System.out.println(resultSet);
 
         try(pstmt; resultSet;){
             if(resultSet.next()) {
