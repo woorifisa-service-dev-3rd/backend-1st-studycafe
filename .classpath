@@ -13,17 +13,17 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/spring-core-5.3.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/mysql-connector-j-8.0.33.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/taglibs-standard-impl-1.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/spring-context-5.3.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/taglibs-standard-spec-1.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/spring-jdbc-5.3.24.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Downloads/woorifisaWorkspace/lib/lombok-1.18.24.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/spring-context-5.3.24.jar"/>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/spring-core-5.3.24.jar"/>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/spring-jdbc-5.3.24.jar"/>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="lib" path="D:/computer_study/FISA/file/lombok-1.18.24.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

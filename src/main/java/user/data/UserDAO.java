@@ -91,9 +91,8 @@ public class UserDAO {
         }
         return user;
     }
-    // 복사끝1
 
-    // 복사2
+    
     public void updateRestTime(User user, int updatedTime, int updatedPoint) throws SQLException {
         final String chargeQuery = "UPDATE user SET resttime = ?, point = ?  WHERE userUid = ?";
         PreparedStatement pstmt = connection.prepareStatement(chargeQuery);
@@ -103,6 +102,5 @@ public class UserDAO {
         pstmt.executeUpdate();
         pstmt.close();
     }
-    // 복사끝2
 }
 
