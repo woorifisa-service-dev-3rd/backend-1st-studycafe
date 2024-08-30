@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    
+    <persistence-unit name="studycafe"> <!-- name attribute의 값은 프로젝트명으로 지정 -->
+    	<properties>
+			
+    		<!-- MySQL 설정 -->
+    		<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/testdb?serverTimezone=UTC"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="3412"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+    		
+    		<!--  옵션(선택) 속성 -->
+    		<!-- Hibernate(JPA) 실행 과정에서 Console에 테이블 생성 DDL, DML 등의 SQL문을 출력 -->
+    		<property name="hibernate.show_sql" value="true"/>
+    		
+    		<!-- SQL의 출력 형태 정렬 -->
+    		<property name="hibernate.format_sql" value="true"/>
+    		
+    		<!-- 애플리케이션 실행 시 DB 테이블을 자동으로 생성할 것인지? -->
+    		<!-- create: 기존 테이블이 존재할 경우, 해당 테이블을 제고(DROP), 테이블을 새로 생성, DROP + CREATE-->
+    		<!-- update: DB테이블과 엔티티 맵핑 정보를 비교, 변경된 사항만 수정 -->
+    		<!-- none: 별도의 테이블을 새로 생성하지 않음 -->
+    		<!-- validate: 직접 SQL로 생성한 테이블과 Entity클래스에 맵핑한 Annotation 맵핑 정보를 비교해서 유효한지 확인 -->
+    		<property name="hibernate.hbm2ddl.auto" value="create"/>
+    	</properties>
+    	
+    </persistence-unit>
+</persistence>
